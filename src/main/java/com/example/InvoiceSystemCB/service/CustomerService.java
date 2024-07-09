@@ -34,8 +34,6 @@ public class CustomerService {
     @Autowired
     private TownRepository townRepository;
 
-
-
     public CustomerDTO createCustomer(CustomerDTO customerDTO){
         Optional<Customer> existingCustomer = customerRepository.findByNameAndStreetAndStreetNrAndTownId(customerDTO.getName(), customerDTO.getStreet(),customerDTO.getStreetNr(), customerDTO.getTownId());
 
@@ -58,10 +56,6 @@ public class CustomerService {
         return newList;
     }
 
-//    public void deleteById(Long id){
-//        customerRepository.deleteById(id);
-//    }
-
     public void deleteCustomerById(Long id) {
         Customer customer = customerRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Customer not found with id: " + id));
@@ -73,8 +67,6 @@ public class CustomerService {
             throw new IllegalStateException("Customer is associated with invoices and cannot be deleted.");
         }
     }
-
-
 
     public Customer updateCustomer(Long id, CustomerDTO newCustomer) {
         Optional<Customer> byId = customerRepository.findById(id);
@@ -102,127 +94,5 @@ public class CustomerService {
         }
         return null;
     }
-
-
-//    public boolean addCustomer(CustomerDTO customerDTO) {
-//        // Check if a customer with the same name and address already exists
-//        Optional<Customer> existingCustomer = customerRepository.findByNameAndAddress(
-//                customerDTO.getName(), customerDTO.getAddress());
-//
-//        if (existingCustomer.isPresent()) {
-//            // If a customer with the same name and address exists, return false
-//            return false;
-//        } else {
-//            // If not, create a new customer and save it to the database
-//            Customer newCustomer = new Customer();
-//            newCustomer.setName(customerDTO.getName());
-//            newCustomer.setSecondName(customerDTO.getSecondName());
-//            newCustomer.setAddress(customerDTO.getAddress());
-//            newCustomer.setPhoneNumber(customerDTO.getPhoneNumber());
-//            newCustomer.setEmail(customerDTO.getEmail());
-//            newCustomer.setCompanyName(customerDTO.getCompanyName());
-//            newCustomer.setBoughtSomething(customerDTO.isBoughtSomething());
-//            newCustomer.setTownId(customerDTO.getTownId());
-//
-//            customerRepository.save(newCustomer);
-//            return true;
-//        }
-//    }
-
-
-
-
-
-//    public List<CustomerDTO> getAllCustomers() {
-//        return customerRepository.findAll().stream()
-//                .map(customerMapper::toDTO)
-//                .collect(Collectors.toList());
-//    }
-//
-//    public CustomerDTO createCustomer(CustomerDTO customerDTO) {
-//        Customer customer = customerMapper.toEntity(customerDTO);
-//        if (customerDTO.getTownId() != null) {
-//            Optional<Town> townOptional = townRepository.findById(customerDTO.getTownId());
-//            if (townOptional.isPresent()) {
-//                customer.setTown(townOptional.get());
-//            } else {
-//                throw new IllegalArgumentException("Town with id " + customerDTO.getTownId() + " not found");
-//            }
-//        }
-//        customer = customerRepository.save(customer);
-//        return customerMapper.toDTO(customer);
-//    }
-//
-//    public void deleteCustomer(Long id) {
-//        customerRepository.deleteById(id);
-//    }
-//
-//    public CustomerDTO updateCustomer(Long id, CustomerDTO customerDTO) {
-//        return customerRepository.findById(id).map(existingCustomer -> {
-//            existingCustomer.setName(customerDTO.getName());
-//            existingCustomer.setSecondName(customerDTO.getSecondName());
-//            existingCustomer.setAddress(customerDTO.getAddress());
-//            existingCustomer.setPhoneNumber(customerDTO.getPhoneNumber());
-//            existingCustomer.setEmail(customerDTO.getEmail());
-//            if (customerDTO.getTownId() != null) {
-//                Optional<Town> townOptional = townRepository.findById(customerDTO.getTownId());
-//                if (townOptional.isPresent()) {
-//                    existingCustomer.setTown(townOptional.get());
-//                } else {
-//                    throw new IllegalArgumentException("Town with id " + customerDTO.getTownId() + " not found");
-//                }
-//            } else {
-//                existingCustomer.setTown(null);
-//            }
-//            Customer updatedCustomer = customerRepository.save(existingCustomer);
-//            return customerMapper.toDTO(updatedCustomer);
-//        }).orElse(null);
-//    }
-//
-//    public CustomerDTO getCustomerById(Long id) {
-//        return customerRepository.findById(id)
-//                .map(customerMapper::toDTO)
-//                .orElse(null);
-//    }
-
-//    @Autowired
-//    private CustomerRepository customerRepository;
-//
-//    @Autowired
-//    private CustomerMapper customerMapper;
-//
-//    public List<CustomerDTO> getAllCustomers() {
-//        return customerRepository.findAll().stream()
-//                .map(customerMapper::toDTO)
-//                .collect(Collectors.toList());
-//    }
-//
-//    public CustomerDTO createCustomer(CustomerDTO customerDTO) {
-//        Customer customer = customerMapper.toEntity(customerDTO);
-//        customer = customerRepository.save(customer);
-//        return customerMapper.toDTO(customer);
-//    }
-//
-//    public void deleteCustomer(Long id) {
-//        customerRepository.deleteById(id);
-//    }
-//
-//    public CustomerDTO updateCustomer(Long id, CustomerDTO customerDTO) {
-//        return customerRepository.findById(id).map(existingCustomer -> {
-//            existingCustomer.setName(customerDTO.getName());
-//            existingCustomer.setSecondName(customerDTO.getSecondName());
-//            existingCustomer.setAddress(customerDTO.getAddress());
-//            existingCustomer.setPhoneNumber(customerDTO.getPhoneNumber());
-//            existingCustomer.setEmail(customerDTO.getEmail());
-//            Customer updatedCustomer = customerRepository.save(existingCustomer);
-//            return customerMapper.toDTO(updatedCustomer);
-//        }).orElse(null);
-//    }
-//
-//    public CustomerDTO getCustomerById(Long id) {
-//        return customerRepository.findById(id)
-//                .map(customerMapper::toDTO)
-//                .orElse(null);
-//    }
 
 }

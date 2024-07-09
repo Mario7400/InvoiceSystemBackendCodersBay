@@ -43,28 +43,4 @@ public class TownService {
         return newList;
     }
 
-//    public TownDTO createTown(TownDTO townDTO) {
-//        Town town = townMapper.toEntity(townDTO);
-//        town = townRepository.save(town);
-//        return townMapper.toDTO(town);
-//    }
-//
-//    public void deleteTown(Long id) {
-//        townRepository.deleteById(id);
-//    }
-//
-//
-//    public TownDTO updateTown(Long id, TownDTO townDTO) {
-//        return townRepository.findById(id).map(existingTown -> {
-//            existingTown.setPlz(townDTO.getPlz());
-//            existingTown.setTownName(townDTO.getTownName());
-//            Town updatedTown = townRepository.save(existingTown);
-//            return townMapper.toDTO(updatedTown);
-//        }).orElse(null);
-//    }
-//    public TownDTO getTownById(Long id) {
-//        return townRepository.findById(id)
-//                .map(townMapper::toDTO)
-//                .orElse(null);
-//    }
 }

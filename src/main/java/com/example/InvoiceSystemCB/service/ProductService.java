@@ -14,8 +14,6 @@ import java.util.List;
 
 @Service
 public class ProductService {
-
-
     @Autowired
     private ProductRepository productRepository;
 
@@ -32,7 +30,6 @@ public class ProductService {
         return productMapper.toDTO(product);
     }
 
-
     public List<ProductDTO> getAllProducts(){
         List<Product> allProducts = productRepository.findAll();
         List<ProductDTO> productDTOList = new ArrayList<>();
@@ -43,14 +40,12 @@ public class ProductService {
         return productDTOList;
     }
 
+    public ProductDTO getProductById(Long productId) {
+        Product product = productRepository.findById(productId)
+                .orElseThrow(() -> new IllegalArgumentException("Product not found with id: " + productId));
 
-//    public void deleteProductByName(String name){
-//        List<Product> byName = productRepository.findByName(name);
-//        if (!byName.isEmpty()){
-//            productRepository.deleteAll(byName);
-//        }
-//    }
-
+        return productMapper.toDTO(product);
+    }
 
     public void deleteProductByName(String name) {
         List<Product> products = productRepository.findByName(name);
@@ -69,10 +64,6 @@ public class ProductService {
         return !invoicesWithProduct.isEmpty();
     }
 
-
-
-
-
     public Product updateProduct(String name, ProductDTO newProduct){
         List<Product> byName = productRepository.findByName(name);
         if(!byName.isEmpty()){
@@ -85,89 +76,5 @@ public class ProductService {
         }
         return null;
     }
-
-//    public Movie updateNewMovie(Long id, Movie newMovie){
-//        Optional<Movie> byId = movieRepository.findById(id);
-//
-//        if (byId.isPresent()){
-//            Movie currentMovie = byId.get();
-//            currentMovie.setTitle(newMovie.getTitle());
-//            currentMovie.setAgeRating(newMovie.getAgeRating());
-//            return movieRepository.save(currentMovie);
-//        }
-//        return null;
-//    }
-//
-
-
-
-
-
-
-
-
-
-
-//
-//
-//    public void deleteMovieByTitle(String title){
-//        List<Movie> byTitle = findByTitle(title);
-//        if(!byTitle.isEmpty()){
-//            movieRepository.deleteAll(byTitle);
-//        }
-//    }
-//
-//
-//    public void deleteProductByName(String name){
-//        productRepository.deleteByName(name);
-////        List<Product> byName = productRepository.findByName(name);
-////        if (!byName.isEmpty()){
-////            productRepository.deleteByName(name);
-////        }
-//    }
-//
-
-
-
-
-
-//    public void deleteMovieByTitle(String title){
-//        List<Movie> byTitle = findByTitle(title);
-//        if(!byTitle.isEmpty()){
-//            movieRepository.deleteAll(byTitle);
-//        }
-//    }
-
-
-
-//    public List<ProductDTO> getAllProducts() {
-//        return productRepository.findAll().stream()
-//                .map(productMapper::toDTO)
-//                .collect(Collectors.toList());
-//    }
-//
-//
-//
-//    public void deleteProduct(Long id) {
-//        productRepository.deleteById(id);
-//    }
-//
-//    public ProductDTO updateProduct(Long id, ProductDTO productDTO) {
-//        return productRepository.findById(id).map(existingProduct -> {
-//            existingProduct.setName(productDTO.getName());
-//            existingProduct.setDescription(productDTO.getDescription());
-//            existingProduct.setPrice(productDTO.getPrice());
-//            existingProduct.setAvailability(productDTO.isAvailability());
-//            Product updatedProduct = productRepository.save(existingProduct);
-//            return productMapper.toDTO(updatedProduct);
-//        }).orElse(null);
-//    }
-//
-//    public ProductDTO getProductById(Long id) {
-//        return productRepository.findById(id)
-//                .map(productMapper::toDTO)
-//                .orElse(null);
-//    }
-
 
 }
